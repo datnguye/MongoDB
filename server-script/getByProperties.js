@@ -30,11 +30,8 @@ value : function(collectionName, properties, byProperties, byFilters, sortBys, s
 
     var sortObj = {};
     if(sortBys) {
-
         sortBys.forEach(function(e, i) {
-
             sortObj[e] = sortOrders && sortOrders[i] ? sortOrders[i] : 1;
-
         });
 
     }
