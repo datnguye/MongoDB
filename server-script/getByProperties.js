@@ -45,10 +45,41 @@ value : function(collectionName, properties, byProperties, byFilters, sortBys, s
         if(!(properties._id)){
             propertiesObj["_id"] = 1;
         }
-        return db.getCollection(collectionName).find(filterObj, propertiesObj).sort(sortObj).skip(pageSize * pageNo).limit(pageSize); 
+        //return db.getCollection(collectionName).find(filterObj, propertiesObj).sort(sortObj).skip(pageSize * pageNo).limit(pageSize); 
+        return db.getCollection(collectionName).aggregate([
+            {
+                $match: filterObj
+            },
+            {
+                $project: propertiesObj
+            },
+            {
+                $sort: sortObj
+            },
+            {
+                $skip: pageSize * pageNo
+            },
+            {
+                $limit: pageSize
+            }
+        ]); 
     }
     else {
-        return db.getCollection(collectionName).find(filterObj).sort(sortObj).skip(pageSize * pageNo).limit(pageSize); 
+        //return db.getCollection(collectionName).find(filterObj).sort(sortObj).skip(pageSize * pageNo).limit(pageSize);
+        return db.getCollection(collectionName).aggregate([
+            {
+                $match: filterObj
+            },
+            {
+                $sort: sortObj
+            },
+            {
+                $skip: pageSize * pageNo
+            },
+            {
+                $limit: pageSize
+            }
+        ]); 
     }
 }});
 
