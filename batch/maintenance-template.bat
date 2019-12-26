@@ -1,0 +1,2 @@
+mongo mongodb://your_host:your_port/your_db_name -u your_login_name -p your_password --eval "load('local_path/local_file_name.js')" > "local_path/output_file_name"
+REM Sample: mongo mongodb://localhost:27017/test -u admin -p admin --eval "load('C:/test.js')" > "C:/output.json"
