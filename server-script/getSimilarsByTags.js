@@ -29,7 +29,8 @@ value : function(contentName, contentId, noOfDoc) {
     return db.getCollection(contentName).aggregate([
         {
             $match: { 
-                _id: { $ne: ObjectId(contentId) }
+                _id: { $ne: ObjectId(contentId) },
+                tags: { $exists: true, $not: {$size: 0} }
             }
         },
         {
